@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "create_dimension:mining",
+  "features": ["create_dimension:ore_iron_small","create_dimension:ore_iron_middle","create_dimension:ore_iron_upper"],
+  "step": "underground_ores"
+}

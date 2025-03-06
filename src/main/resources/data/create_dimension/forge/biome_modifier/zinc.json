@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "create_dimension:mining",
+  "features": "create_dimension:ore_zinc_placed",
+  "step": "underground_ores"
+}

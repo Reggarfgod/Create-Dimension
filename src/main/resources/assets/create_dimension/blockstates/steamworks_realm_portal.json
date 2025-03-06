@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "create_dimension:block/steamworks_realm_portal_ew"
+    },
+    "axis=x": {
+      "model": "create_dimension:block/steamworks_realm_portal_ns"
+    }
+  }
+}

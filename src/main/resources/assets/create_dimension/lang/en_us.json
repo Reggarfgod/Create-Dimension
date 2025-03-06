@@ -1,0 +1,7 @@
+{
+  "item_group.create_dimension.create_dimension_tab": "Create: Dimension",
+  "biome.create_dimension.mining": "Steamworks Realm",
+  "item.create_dimension.steamworks_realm": "Steamworks Realm Portal Igniter",
+  "tooltip.create_dimension.steamworks_realm_igniter.tooltip": "§6Obtained from: Andesite Worker Villager",
+  "tooltip.create_dimension.not_craftable_steamworks_realm_igniter.tooltip": "§2This item is not Craftable"
+}

@@ -1,0 +1,46 @@
+{
+  "type": "create_dimension:steamworks_realm",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "create_dimension:mining",
+      "lakes": false,
+      "features": true,
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        },
+        {
+          "block": "minecraft:end_stone",
+          "height": 64
+        },
+        {
+          "block": "minecraft:netherrack",
+          "height": 64
+        },
+        {
+          "block": "minecraft:deepslate",
+          "height": 64
+        },
+        {
+          "block": "minecraft:stone",
+          "height": 119
+        },
+        {
+          "block": "minecraft:andesite",
+          "height": 40
+        },
+        {
+          "block": "minecraft:dirt",
+          "height": 4
+        },
+        {
+          "block": "minecraft:grass_block",
+          "height": 1
+        }
+      ],
+      "structure_overrides": []
+    }
+  }
+}
