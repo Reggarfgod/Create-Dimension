@@ -1,4 +1,7 @@
-<h3 data-start="119" data-end="165">&nbsp;</h3>
+<h1><a href="https://zap-hosting.com/reggarf" target="_blank" rel="noopener"><strong><img style="display: block; margin-left: auto; margin-right: auto;" src="https://media.forgecdn.net/attachments/description/1010929/description_2dbdedf7-e1a0-4bcd-86a6-01c26447af70.png"></strong></a></h1>
+<h1 style="text-align: center;"><strong>THANKS TO OUR SPONSORS</strong></h1>
+<p style="text-align: center;"><strong>THANKS TO ZAP-HOSTING! Use code Reggarf-1047 for 20% off any order!</strong></p>
+<p style="text-align: center;"><strong><a href="https://www.curseforge.com/linkout?remoteUrl=https%253a%252f%252fzap-hosting.com%252freggarf" target="_blank" rel="nofollow noopener">https://zap-hosting.com/reggarf</a></strong></p>
 <h3 data-start="119" data-end="165"><strong data-start="123" data-end="163"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://media.forgecdn.net/attachments/description/null/description_b1f24448-a6b1-43ed-a7aa-b0e4903bc0d7.png" alt="" width="648" height="648"></strong></h3>
 <h3 data-start="119" data-end="165"><strong data-start="123" data-end="163">Create: Dimension &ndash; Steamworks Realm</strong></h3>
 <p data-start="166" data-end="225"><strong data-start="166" data-end="223">A New Industrial Mining Dimension for the Create Mod!</strong></p>
