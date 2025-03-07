@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "create_dimension:mining",
+  "features": "create_dimension:ore_copper_large",
+  "step": "underground_ores"
+}

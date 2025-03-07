@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "create_dimension:mining",
+  "features": "create_dimension:ore_emerald",
+  "step": "underground_ores"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "create_dimension:mining",
+  "features": ["create_dimension:ore_zinc_placed","create_dimension:ore_zinc_upper"],
+  "step": "underground_ores"
+}

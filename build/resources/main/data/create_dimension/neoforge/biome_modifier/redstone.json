@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "create_dimension:mining",
+  "features": ["create_dimension:ore_redstone","create_dimension:ore_redstone_lower"],
+  "step": "underground_ores"
+}

@@ -1,0 +1,27 @@
+{
+  "feature": "create_dimension:ore_zinc",
+  "placement": [
+    {
+      "count": 9,
+      "type": "minecraft:count"
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "height": {
+        "min_inclusive": {
+          "absolute": 120
+        },
+        "max_inclusive": {
+          "absolute": 384
+        },
+        "type": "minecraft:trapezoid"
+      },
+      "type": "minecraft:height_range"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
