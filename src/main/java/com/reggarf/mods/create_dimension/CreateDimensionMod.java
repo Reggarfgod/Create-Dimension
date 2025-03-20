@@ -1,8 +1,9 @@
 package com.reggarf.mods.create_dimension;
 
-import com.reggarf.mods.create_dimension.init.CreateDimensionModBlocks;
-import com.reggarf.mods.create_dimension.init.CreateDimensionModItems;
-import com.reggarf.mods.create_dimension.init.CreateDimensionModTabs;
+
+import com.reggarf.mods.create_dimension.registry.ModBlocks;
+import com.reggarf.mods.create_dimension.registry.ModItems;
+import com.reggarf.mods.create_dimension.registry.ModTabs;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -40,11 +41,13 @@ public class CreateDimensionMod {
 		NeoForge.EVENT_BUS.register(this);
 		modEventBus.addListener(this::registerNetworking);
 
-		CreateDimensionModBlocks.REGISTRY.register(modEventBus);
+		ModBlocks.REGISTRY.register(modEventBus);
 
-		CreateDimensionModItems.REGISTRY.register(modEventBus);
+		ModItems.REGISTRY.register(modEventBus);
 
-		CreateDimensionModTabs.REGISTRY.register(modEventBus);
+		ModTabs.REGISTRY.register(modEventBus);
+
+
 
 
 	}

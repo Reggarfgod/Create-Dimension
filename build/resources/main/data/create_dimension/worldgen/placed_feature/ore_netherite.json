@@ -2,7 +2,7 @@
   "feature": "create_dimension:ore_netherite",
   "placement": [
     {
-      "count": 4,
+      "count": 3,
       "type": "minecraft:count"
     },
     {

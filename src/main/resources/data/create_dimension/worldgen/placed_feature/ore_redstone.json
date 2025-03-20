@@ -1,8 +1,8 @@
 {
-  "feature": "minecraft:ore_redstone",
+  "feature": "create_dimension:ore_redstone",
   "placement": [
     {
-      "count": 4,
+      "count": 6,
       "type": "minecraft:count"
     },
     {

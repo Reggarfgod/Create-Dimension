@@ -1,38 +1,43 @@
 {
-  "has_precipitation": true,
   "temperature": 1,
-  "downfall": 0.0,
+  "downfall": 1,
+  "has_precipitation": false,
   "effects": {
     "foliage_color": -13369549,
     "grass_color": -3355648,
     "sky_color": -6710887,
     "fog_color": -3355444,
     "water_color": -16724788,
-    "water_fog_color": -13369396
+    "water_fog_color": -13369396,
+    "grass_color_modifier": "dark_forest",
+    "ambient_sound": "minecraft:ambient.cave",
+    "particle": {
+      "options": {
+        "type": "minecraft:ash"
+      },
+      "probability": 0
+    }
   },
-  "spawners": {
-    "monster": [],
-    "creature": [],
-    "ambient": [],
-    "axolotls": [],
-    "underground_water_creature": [],
-    "water_creature": [],
-    "water_ambient": [],
-    "misc": []
-  },
+  "spawners": {},
   "spawn_costs": {},
   "carvers": {},
   "features": [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    []
+    [
+      "create_dimension:ore_coal_lower",
+      "create_dimension:ore_coal_upper",
+      "create_dimension:ore_copper_large",
+      "create_dimension:ore_diamond_large",
+      "create_dimension:ore_emerald",
+      "create_dimension:ore_gold",
+      "create_dimension:ore_iron_middle",
+      "create_dimension:ore_iron_small",
+      "create_dimension:ore_iron_upper",
+      "create_dimension:ore_lapis",
+      "create_dimension:ore_netherite",
+      "create_dimension:ore_quartz_nether",
+      "create_dimension:ore_redstone",
+      "create_dimension:ore_redstone_lower",
+      "create_dimension:ore_zinc_placed"
+    ]
   ]
 }

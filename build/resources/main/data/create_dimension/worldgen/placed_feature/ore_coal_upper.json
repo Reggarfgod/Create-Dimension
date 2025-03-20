@@ -1,5 +1,5 @@
 {
-  "feature": "minecraft:ore_coal",
+  "feature": "create_dimension:ore_coal",
   "placement": [
     {
       "count": 30,

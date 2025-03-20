@@ -11,9 +11,9 @@ forgedatauserdev
 --gameDir
 .
 --fml.neoForgeVersion
-21.1.125
+21.1.129
 --fml.fmlVersion
-4.0.37
+4.0.38
 --fml.mcVersion
 1.21.1
 --fml.neoFormVersion
@@ -24,6 +24,6 @@ forgedatauserdev
 create_dimension
 --all
 --output
-D:\\Download\\MOD\\better\\neoforge\\create_dimension\\src\\generated\\resources
+D:\\Mods\\src\\generated\\resources
 --existing
-D:\\Download\\MOD\\better\\neoforge\\create_dimension\\src\\main\\resources
+D:\\Mods\\src\\main\\resources

@@ -1,5 +1,5 @@
 {
-  "feature": "minecraft:ore_copper_large",
+  "feature": "create_dimension:ore_copper_large",
   "placement": [
     {
       "count": 16,

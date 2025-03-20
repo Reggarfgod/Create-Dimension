@@ -2,7 +2,7 @@
   "feature": "create_dimension:ore_quartz",
   "placement": [
     {
-      "count": 16,
+      "count": 9,
       "type": "minecraft:count"
     },
     {
@@ -11,10 +11,10 @@
     {
       "height": {
         "min_inclusive": {
-          "above_bottom": 64
+          "above_bottom": 0
         },
         "max_inclusive": {
-          "above_bottom": 128
+          "above_bottom": 132
         },
         "type": "minecraft:uniform"
       },

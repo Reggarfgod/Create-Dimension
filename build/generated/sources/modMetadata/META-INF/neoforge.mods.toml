@@ -17,7 +17,7 @@ license = "MIT"
 # The modid of the mod
 modId = "create_dimension" #mandatory
 # The version number of the mod
-version = "1.0.1-fix-1" #mandatory
+version = "1.0.2" #mandatory
 # A display name for the mod
 displayName = "create_dimension" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://docs.neoforge.net/docs/misc/updatechecker/
@@ -60,7 +60,7 @@ versionRange = "[21,)" #mandatory
 # An ordering relationship for the dependency.
 # BEFORE - This mod is loaded BEFORE the dependency
 # AFTER - This mod is loaded AFTER the dependency
-ordering = "NONE"
+ordering = "AFTER" #mand
 # Side this dependency is applied on - BOTH, CLIENT, or SERVER
 side = "BOTH"
 # Here's another dependency
@@ -69,7 +69,7 @@ modId = "minecraft"
 type = "required"
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
 versionRange = "[1.21.1,1.22)"
-ordering = "NONE"
+ordering = "AFTER"
 side = "BOTH"
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
@@ -80,7 +80,7 @@ side = "BOTH"
 [[dependencies."create_dimension"]]
 modId="create"
 type="required"
-versionRange="[6.0.2,6.1.0)"
+versionRange="[6.0.3,6.1.0)"
 ordering="AFTER"
 side="BOTH"
 [[dependencies."create_dimension"]]

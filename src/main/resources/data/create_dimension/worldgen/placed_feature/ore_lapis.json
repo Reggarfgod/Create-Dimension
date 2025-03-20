@@ -1,8 +1,8 @@
 {
-  "feature": "minecraft:ore_lapis",
+  "feature": "create_dimension:ore_lapis",
   "placement": [
     {
-      "count": 2,
+      "count": 3,
       "type": "minecraft:count"
     },
     {

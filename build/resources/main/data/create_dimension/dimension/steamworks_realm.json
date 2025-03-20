@@ -8,36 +8,36 @@
       "features": true,
       "layers": [
         {
-          "block": "minecraft:bedrock",
-          "height": 1
+          "height": 1,
+          "block": "minecraft:bedrock"
         },
         {
-          "block": "minecraft:end_stone",
-          "height": 64
+          "height": 64,
+          "block": "minecraft:end_stone"
         },
         {
-          "block": "minecraft:netherrack",
-          "height": 64
+          "height": 64,
+          "block": "minecraft:netherrack"
         },
         {
-          "block": "minecraft:deepslate",
-          "height": 64
+          "height": 64,
+          "block": "minecraft:deepslate"
         },
         {
-          "block": "minecraft:stone",
-          "height": 119
+          "height": 119,
+          "block": "minecraft:stone"
         },
         {
-          "block": "minecraft:andesite",
-          "height": 40
+          "height": 40,
+          "block": "minecraft:andesite"
         },
         {
-          "block": "minecraft:dirt",
-          "height": 4
+          "height": 4,
+          "block": "minecraft:dirt"
         },
         {
-          "block": "minecraft:grass_block",
-          "height": 1
+          "height": 1,
+          "block": "minecraft:grass_block"
         }
       ],
       "structure_overrides": []
