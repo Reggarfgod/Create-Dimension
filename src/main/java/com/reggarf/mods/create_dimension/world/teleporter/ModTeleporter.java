@@ -1,7 +1,7 @@
 
 package com.reggarf.mods.create_dimension.world.teleporter;
 
-import com.reggarf.mods.create_dimension.init.CreateDimensionModBlocks;
+import com.reggarf.mods.create_dimension.registry.ModBlocks;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.fml.common.Mod;
@@ -39,14 +39,14 @@ import java.util.Comparator;
 import com.google.common.collect.ImmutableSet;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class SteamworksRealmTeleporter implements ITeleporter {
+public class ModTeleporter implements ITeleporter {
 	public static final TicketType<BlockPos> CUSTOM_PORTAL = TicketType.create("steamworks_realm_portal", Vec3i::compareTo, 300);
 	public static Holder<PoiType> poi = null;
 
 	@SubscribeEvent
 	public static void registerPointOfInterest(RegisterEvent event) {
 		event.register(ForgeRegistries.Keys.POI_TYPES, registerHelper -> {
-			PoiType poiType = new PoiType(ImmutableSet.copyOf(CreateDimensionModBlocks.STEAMWORKS_REALM_PORTAL.get().getStateDefinition().getPossibleStates()), 0, 1);
+			PoiType poiType = new PoiType(ImmutableSet.copyOf(ModBlocks.STEAMWORKS_REALM_PORTAL.get().getStateDefinition().getPossibleStates()), 0, 1);
 			registerHelper.register("steamworks_realm_portal", poiType);
 			poi = ForgeRegistries.POI_TYPES.getHolder(poiType).get();
 		});
@@ -55,7 +55,7 @@ public class SteamworksRealmTeleporter implements ITeleporter {
 	private final ServerLevel level;
 	private final BlockPos entityEnterPos;
 
-	public SteamworksRealmTeleporter(ServerLevel worldServer, BlockPos entityEnterPos) {
+	public ModTeleporter(ServerLevel worldServer, BlockPos entityEnterPos) {
 		this.level = worldServer;
 		this.entityEnterPos = entityEnterPos;
 	}
@@ -159,7 +159,7 @@ public class SteamworksRealmTeleporter implements ITeleporter {
 				}
 			}
 		}
-		BlockState blockstate = CreateDimensionModBlocks.STEAMWORKS_REALM_PORTAL.get().defaultBlockState().setValue(NetherPortalBlock.AXIS, p_77668_);
+		BlockState blockstate = ModBlocks.STEAMWORKS_REALM_PORTAL.get().defaultBlockState().setValue(NetherPortalBlock.AXIS, p_77668_);
 		for (int k2 = 0; k2 < 2; ++k2) {
 			for (int l2 = 0; l2 < 3; ++l2) {
 				blockpos$mutableblockpos.setWithOffset(blockpos, k2 * direction.getStepX(), l2, k2 * direction.getStepZ());
@@ -219,12 +219,12 @@ public class SteamworksRealmTeleporter implements ITeleporter {
 			if (blockstate.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) {
 				direction$axis = blockstate.getValue(BlockStateProperties.HORIZONTAL_AXIS);
 				BlockUtil.FoundRectangle teleportationrepositioner$result = BlockUtil.getLargestRectangleAround(this.entityEnterPos, direction$axis, 21, Direction.Axis.Y, 21, pos -> entity.level().getBlockState(pos) == blockstate);
-				vector3d = SteamworksRealmPortalShape.getRelativePosition(teleportationrepositioner$result, direction$axis, entity.position(), entity.getDimensions(entity.getPose()));
+				vector3d = ModPortalShape.getRelativePosition(teleportationrepositioner$result, direction$axis, entity.position(), entity.getDimensions(entity.getPose()));
 			} else {
 				direction$axis = Direction.Axis.X;
 				vector3d = new Vec3(0.5, 0, 0);
 			}
-			return SteamworksRealmPortalShape.createPortalInfo(server, repositioner, direction$axis, vector3d, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
+			return ModPortalShape.createPortalInfo(server, repositioner, direction$axis, vector3d, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
 		}).orElse(new PortalInfo(entity.position(), Vec3.ZERO, entity.getYRot(), entity.getXRot()));
 	}
 

@@ -1,8 +1,8 @@
 package com.reggarf.mods.create_dimension;
 
-import com.reggarf.mods.create_dimension.init.CreateDimensionModBlocks;
-import com.reggarf.mods.create_dimension.init.CreateDimensionModItems;
-import com.reggarf.mods.create_dimension.init.CreateDimensionModTabs;
+import com.reggarf.mods.create_dimension.registry.ModBlocks;
+import com.reggarf.mods.create_dimension.registry.ModItems;
+import com.reggarf.mods.create_dimension.registry.ModTabs;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -39,11 +39,11 @@ public class CreateDimensionMod {
 		MinecraftForge.EVENT_BUS.register(this);
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		CreateDimensionModBlocks.REGISTRY.register(bus);
+		ModBlocks.REGISTRY.register(bus);
 
-		CreateDimensionModItems.REGISTRY.register(bus);
+		ModItems.REGISTRY.register(bus);
 
-		CreateDimensionModTabs.REGISTRY.register(bus);
+		ModTabs.REGISTRY.register(bus);
 
 	}
 

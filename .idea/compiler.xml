@@ -11,6 +11,10 @@
         <module name="create_dimension.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="17" />
+    <bytecodeTargetLevel target="17">
+      <module name="Mods" target="21" />
+      <module name="Mods.main" target="21" />
+      <module name="Mods.test" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -3,20 +3,14 @@ package com.reggarf.mods.create_dimension.block;
 
 
 
-import com.reggarf.mods.create_dimension.world.teleporter.SteamworksRealmPortalShape;
-import com.reggarf.mods.create_dimension.world.teleporter.SteamworksRealmTeleporter;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.BlockGetter;
+import com.reggarf.mods.create_dimension.world.teleporter.ModPortalShape;
+import com.reggarf.mods.create_dimension.world.teleporter.ModTeleporter;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.Blocks;
@@ -32,16 +26,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
-import org.apache.commons.codec.language.bm.Lang;
 
-import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 
-import static com.ibm.icu.impl.ValidIdentifiers.Datatype.variant;
-
-public class SteamworksRealmPortalBlock extends NetherPortalBlock {
-	public SteamworksRealmPortalBlock() {
+public class ModPortalBlock extends NetherPortalBlock {
+	public ModPortalBlock() {
 		super(Properties.of().noCollission().randomTicks().pushReaction(PushReaction.BLOCK).strength(-1.0F).sound(SoundType.GLASS).lightLevel(s -> 9).noLootTable());
 	}
 
@@ -50,7 +39,7 @@ public class SteamworksRealmPortalBlock extends NetherPortalBlock {
 	}
 
 	public static void portalSpawn(Level world, BlockPos pos) {
-		Optional<SteamworksRealmPortalShape> optional = SteamworksRealmPortalShape.findEmptyPortalShape(world, pos, Direction.Axis.X);
+		Optional<ModPortalShape> optional = ModPortalShape.findEmptyPortalShape(world, pos, Direction.Axis.X);
 		if (optional.isPresent()) {
 			optional.get().createPortalBlocks();
 		}
@@ -61,7 +50,7 @@ public class SteamworksRealmPortalBlock extends NetherPortalBlock {
 		Direction.Axis direction$axis = p_54929_.getAxis();
 		Direction.Axis direction$axis1 = p_54928_.getValue(AXIS);
 		boolean flag = direction$axis1 != direction$axis && direction$axis.isHorizontal();
-		return !flag && !p_54930_.is(this) && !(new SteamworksRealmPortalShape(p_54931_, p_54932_, direction$axis1)).isComplete() ? Blocks.AIR.defaultBlockState() : super.updateShape(p_54928_, p_54929_, p_54930_, p_54931_, p_54932_, p_54933_);
+		return !flag && !p_54930_.is(this) && !(new ModPortalShape(p_54931_, p_54932_, direction$axis1)).isComplete() ? Blocks.AIR.defaultBlockState() : super.updateShape(p_54928_, p_54929_, p_54930_, p_54931_, p_54932_, p_54933_);
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -104,6 +93,6 @@ public class SteamworksRealmPortalBlock extends NetherPortalBlock {
 	}
 
 	private void teleportToDimension(Entity entity, BlockPos pos, ResourceKey<Level> destinationType) {
-		entity.changeDimension(entity.getServer().getLevel(destinationType), new SteamworksRealmTeleporter(entity.getServer().getLevel(destinationType), pos));
+		entity.changeDimension(entity.getServer().getLevel(destinationType), new ModTeleporter(entity.getServer().getLevel(destinationType), pos));
 	}
 }

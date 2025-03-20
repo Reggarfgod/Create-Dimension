@@ -3,5 +3,16 @@
   "biome.create_dimension.mining": "Steamworks Realm",
   "item.create_dimension.steamworks_realm": "Steamworks Realm Portal Igniter",
   "tooltip.create_dimension.steamworks_realm_igniter.tooltip": "§6Obtained from: Andesite Worker Villager",
-  "tooltip.create_dimension.not_craftable_steamworks_realm_igniter.tooltip": "§2This item is not Craftable"
+  "tooltip.create_dimension.not_craftable_steamworks_realm_igniter.tooltip": "§2This item is not Craftable",
+  "tooltip.create_dimension.ores_info": "§6Available Ores in this Dimension:",
+  "tooltip.create_dimension.iron": "§f• Iron Ore §7(Y: 64 to 380)",
+  "tooltip.create_dimension.gold": "§e• Gold Ore §7(Y: 0 to 132)",
+  "tooltip.create_dimension.copper": "§6• Copper Ore §7(Y: -16 to 312)",
+  "tooltip.create_dimension.zinc": "§7• Zinc Ore §7(Y: -64 to 126)",
+  "tooltip.create_dimension.diamond": "§b• Diamond Ore §7(Y: 96 to 176)",
+  "tooltip.create_dimension.emerald": "§a• Emerald Ore §7(Y: -16 to 480)",
+  "tooltip.create_dimension.lapis": "§9• Lapis Lazuli Ore §7(Y: 64 to 150)",
+  "tooltip.create_dimension.quartz": "§f• Nether Quartz Ore §7(Y: 0 to 132)",
+  "tooltip.create_dimension.redstone": "§c• Redstone Ore §7(Y: 128 to 205)",
+  "tooltip.create_dimension.netherite": "§8• Ancient Debris §7(Y: 0 to 132)"
 }
