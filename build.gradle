@@ -136,6 +136,7 @@ repositories {
     maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
     maven { url = "https://maven.tterrag.com" } // Registrate
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
+
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
      flatDir {
@@ -156,7 +157,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:jei-238222:6075247")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:5057220")
-    implementation fg.deobf("curse.maven:create-better-villager-1108525:6267306")
+    implementation fg.deobf("curse.maven:create-better-villager-1108525:6508333")
     implementation fg.deobf("curse.maven:underground-villages-stoneholm-1123746:5887917")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
@@ -191,8 +192,6 @@ minecraft {
         client {
             property("mixin.env.remapRefMap", "true")
             property("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
-
-            arg("-mixin.config=create.mixins.json")
         }
     }
 }

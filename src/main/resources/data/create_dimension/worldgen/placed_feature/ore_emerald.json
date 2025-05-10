@@ -2,7 +2,7 @@
   "feature": "create_dimension:ore_emerald",
   "placement": [
     {
-      "count": 100,
+      "count": 20,
       "type": "minecraft:count"
     },
     {
