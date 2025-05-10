@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Mods.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Mods.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Mods.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Mods.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_dimension.test.iml" filepath="$PROJECT_DIR$/.idea/modules/create_dimension.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Create-Dimension.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Create-Dimension.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Create-Dimension.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Create-Dimension.test.iml" />
     </modules>
   </component>
 </project>

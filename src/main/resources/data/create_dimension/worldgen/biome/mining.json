@@ -10,7 +10,6 @@
     "water_color": -16724788,
     "water_fog_color": -13369396,
     "grass_color_modifier": "dark_forest",
-    "ambient_sound": "minecraft:ambient.cave",
     "particle": {
       "options": {
         "type": "minecraft:ash"

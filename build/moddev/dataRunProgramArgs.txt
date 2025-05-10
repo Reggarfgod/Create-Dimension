@@ -24,6 +24,6 @@ forgedatauserdev
 create_dimension
 --all
 --output
-D:\\Mods\\src\\generated\\resources
+D:\\Download\\MOD\\Create-Dimension\\src\\generated\\resources
 --existing
-D:\\Mods\\src\\main\\resources
+D:\\Download\\MOD\\Create-Dimension\\src\\main\\resources
