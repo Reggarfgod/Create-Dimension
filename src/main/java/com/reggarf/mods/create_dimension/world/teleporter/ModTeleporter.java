@@ -2,6 +2,7 @@
 package com.reggarf.mods.create_dimension.world.teleporter;
 
 import com.reggarf.mods.create_dimension.registry.ModBlocks;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.fml.common.Mod;
@@ -62,7 +63,7 @@ public class ModTeleporter implements ITeleporter {
 
 	public Optional<BlockUtil.FoundRectangle> findPortalAround(BlockPos p_192986_, boolean p_192987_, WorldBorder p_192988_) {
 		PoiManager poimanager = this.level.getPoiManager();
-		int i = p_192987_ ? 16 : 128;
+		int i = p_192987_ ? 8 : 64;
 		poimanager.ensureLoadedAndValid(this.level, p_192986_, i);
 		Optional<PoiRecord> optional = poimanager.getInSquare((p_230634_) -> {
 			return p_230634_.is(poi.unwrapKey().get());
@@ -227,22 +228,123 @@ public class ModTeleporter implements ITeleporter {
 			return ModPortalShape.createPortalInfo(server, repositioner, direction$axis, vector3d, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
 		}).orElse(new PortalInfo(entity.position(), Vec3.ZERO, entity.getYRot(), entity.getXRot()));
 	}
+    //	protected Optional<BlockUtil.FoundRectangle> getExitPortal(Entity entity, BlockPos pos, WorldBorder worldBorder) {
+//		Optional<BlockUtil.FoundRectangle> optional = this.findPortalAround(pos, false, worldBorder);
+//		if (entity instanceof ServerPlayer) {
+//			if (optional.isPresent()) {
+//				return optional;
+//			} else {
+//				Direction.Axis direction$axis = entity.level().getBlockState(this.entityEnterPos).getOptionalValue(NetherPortalBlock.AXIS).orElse(Direction.Axis.X);
+//				return this.createPortal(pos, direction$axis);
+//			}
+//		} else {
+//			return optional;
+//		}
+//	}
+    protected Optional<BlockUtil.FoundRectangle> getExitPortal(Entity entity, BlockPos pos, WorldBorder worldBorder) {
+        // Make portal search Y-tolerant
+        int searchY = pos.getY();
+        int minY = Math.max(this.level.getMinBuildHeight(), searchY - 256);
+        int maxY = Math.min(this.level.getMaxBuildHeight(), searchY + 256);
 
-	protected Optional<BlockUtil.FoundRectangle> getExitPortal(Entity entity, BlockPos pos, WorldBorder worldBorder) {
-		Optional<BlockUtil.FoundRectangle> optional = this.findPortalAround(pos, false, worldBorder);
-		if (entity instanceof ServerPlayer) {
-			if (optional.isPresent()) {
-				return optional;
-			} else {
-				Direction.Axis direction$axis = entity.level().getBlockState(this.entityEnterPos).getOptionalValue(NetherPortalBlock.AXIS).orElse(Direction.Axis.X);
-				return this.createPortal(pos, direction$axis);
-			}
-		} else {
-			return optional;
-		}
-	}
+        // Search across vertical range
+        Optional<BlockUtil.FoundRectangle> optional = Optional.empty();
+        for (int y = minY; y <= maxY; y += 8) {
+            BlockPos checkPos = new BlockPos(pos.getX(), y, pos.getZ());
+            optional = this.findPortalAround(checkPos, false, worldBorder);
+            if (optional.isPresent())
+                break;
+        }
 
-	private boolean canPortalReplaceBlock(BlockPos.MutableBlockPos pos) {
+        if (entity instanceof ServerPlayer) {
+            if (optional.isPresent()) {
+                return optional;
+            } else {
+                Direction.Axis axis = entity.level().getBlockState(this.entityEnterPos)
+                        .getOptionalValue(BlockStateProperties.HORIZONTAL_AXIS)
+                        .orElse(Direction.Axis.X);
+                return this.createPortal(pos, axis);
+            }
+        } else {
+            return optional;
+        }
+    }
+
+
+//    public static PortalInfo getPortalInfo(ServerLevel destination, Entity probe) {
+//        // Try to find an existing Steamworks portal near the world spawn or the probe position
+//        BlockPos searchCenter = BlockPos.containing(probe.getX(), probe.getY(), probe.getZ());
+//        BlockPos portalPos = findNearestPortal(destination, searchCenter, 293); // 64 block radius search
+//
+//        if (portalPos == null) {
+//            // fallback — no portal found, place near spawn
+//            double x = destination.getSharedSpawnPos().getX() + 0.5;
+//            double y = destination.getSharedSpawnPos().getY() + 2;
+//            double z = destination.getSharedSpawnPos().getZ() + 0.5;
+//            return new PortalInfo(new Vec3(x, y, z), probe.getDeltaMovement(), probe.getYRot(), probe.getXRot());
+//        }
+//
+//        // Move entity slightly inside the portal center
+//        Vec3 pos = Vec3.atCenterOf(portalPos);
+//        return new PortalInfo(pos, probe.getDeltaMovement(), probe.getYRot(), probe.getXRot());
+//    }
+public static PortalInfo getPortalInfo(ServerLevel destination, Entity probe) {
+    BlockPos center = BlockPos.containing(probe.getX(), probe.getY(), probe.getZ());
+
+    //Use large Y search tolerance
+    BlockPos portalPos = findNearestPortalIgnoreY(destination, center, 32, 256);
+
+    if (portalPos == null) {
+        // fallback near spawn
+        double x = destination.getSharedSpawnPos().getX() + 0.5;
+        double y = destination.getSharedSpawnPos().getY() + 2;
+        double z = destination.getSharedSpawnPos().getZ() + 0.5;
+        return new PortalInfo(new Vec3(x, y, z), probe.getDeltaMovement(), probe.getYRot(), probe.getXRot());
+    }
+
+    Vec3 pos = Vec3.atCenterOf(portalPos);
+    return new PortalInfo(pos, probe.getDeltaMovement(), probe.getYRot(), probe.getXRot());
+}
+
+//    private static BlockPos findNearestPortal(ServerLevel level, BlockPos center, int radius) {
+//        Block portalBlock = ModBlocks.STEAMWORKS_REALM_PORTAL.get();
+//        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+//
+//        // Simple cube search around the center
+//        for (int x = -radius; x <= radius; x++) {
+//            for (int y = -radius; y <= radius; y++) {
+//                for (int z = -radius; z <= radius; z++) {
+//                    mutable.set(center.getX() + x, center.getY() + y, center.getZ() + z);
+//                    BlockState state = level.getBlockState(mutable);
+//                    if (state.is(portalBlock)) {
+//                        return mutable.immutable();
+//                    }
+//                }
+//            }
+//        }
+//        return null;
+//    }
+
+    private static BlockPos findNearestPortalIgnoreY(ServerLevel level, BlockPos center, int radiusXZ, int maxYDiff) {
+        Block portalBlock = ModBlocks.STEAMWORKS_REALM_PORTAL.get();
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+
+        int minY = Math.max(level.getMinBuildHeight(), center.getY() - maxYDiff);
+        int maxY = Math.min(level.getMaxBuildHeight(), center.getY() + maxYDiff);
+
+        for (int x = -radiusXZ; x <= radiusXZ; x++) {
+            for (int z = -radiusXZ; z <= radiusXZ; z++) {
+                for (int y = minY; y <= maxY; y++) {
+                    mutable.set(center.getX() + x, y, center.getZ() + z);
+                    if (level.getBlockState(mutable).is(portalBlock))
+                        return mutable.immutable();
+                }
+            }
+        }
+        return null;
+    }
+
+    private boolean canPortalReplaceBlock(BlockPos.MutableBlockPos pos) {
 		BlockState blockstate = this.level.getBlockState(pos);
 		return blockstate.canBeReplaced() && blockstate.getFluidState().isEmpty();
 	}

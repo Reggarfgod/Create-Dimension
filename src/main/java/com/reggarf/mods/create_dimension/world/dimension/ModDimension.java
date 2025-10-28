@@ -1,4 +1,3 @@
-
 package com.reggarf.mods.create_dimension.world.dimension;
 
 import net.minecraftforge.fml.common.Mod;
@@ -13,23 +12,23 @@ import net.minecraft.client.renderer.DimensionSpecialEffects;
 
 @Mod.EventBusSubscriber
 public class ModDimension {
-	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class SteamworksRealmSpecialEffectsHandler {
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public static void registerDimensionSpecialEffects(RegisterDimensionSpecialEffectsEvent event) {
-			DimensionSpecialEffects customEffect = new DimensionSpecialEffects(192f, true, DimensionSpecialEffects.SkyType.NONE, false, false) {
-				@Override
-				public Vec3 getBrightnessDependentFogColor(Vec3 color, float sunHeight) {
-					return color;
-				}
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class SteamworksRealmSpecialEffectsHandler {
+        @SubscribeEvent
+        @OnlyIn(Dist.CLIENT)
+        public static void registerDimensionSpecialEffects(RegisterDimensionSpecialEffectsEvent event) {
+            DimensionSpecialEffects customEffect = new DimensionSpecialEffects(192f, true, DimensionSpecialEffects.SkyType.NONE, false, false) {
+                @Override
+                public Vec3 getBrightnessDependentFogColor(Vec3 color, float sunHeight) {
+                    return color;
+                }
 
-				@Override
-				public boolean isFoggyAt(int x, int y) {
-					return false;
-				}
-			};
-			event.register(new ResourceLocation("create_dimension:steamworks_realm"), customEffect);
-		}
-	}
+                @Override
+                public boolean isFoggyAt(int x, int y) {
+                    return false;
+                }
+            };
+            event.register(new ResourceLocation("create_dimension:steamworks_realm"), customEffect);
+        }
+    }
 }

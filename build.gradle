@@ -134,7 +134,7 @@ repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
     maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
-    maven { url = "https://maven.tterrag.com" } // Registrate
+    maven { url = "https://maven.ithundxr.dev/mirror" } // Registrate
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
 
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
@@ -159,6 +159,11 @@ dependencies {
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:5057220")
     implementation fg.deobf("curse.maven:create-better-villager-1108525:6508333")
     implementation fg.deobf("curse.maven:underground-villages-stoneholm-1123746:5887917")
+    implementation fg.deobf("curse.maven:ftb-chunks-forge-314906:5956390")
+    implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
+    implementation fg.deobf("curse.maven:ftb-teams-forge-404468:6130786")
+    implementation fg.deobf("curse.maven:ftb-library-forge-404465:6807424")
+
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
