@@ -25,4 +25,4 @@ Before updating the mod, please make a backup of your world to prevent any poten
 
 #Balance
 
-7. Changed Andesite portal block to RAILWAY CASING just from one side
+7. Changed Andesite portal block to Train CASING just from one side
