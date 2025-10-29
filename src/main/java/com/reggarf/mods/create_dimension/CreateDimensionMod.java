@@ -3,6 +3,11 @@ package com.reggarf.mods.create_dimension;
 import com.reggarf.mods.create_dimension.registry.ModBlocks;
 import com.reggarf.mods.create_dimension.registry.ModItems;
 import com.reggarf.mods.create_dimension.registry.ModTabs;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -33,21 +38,29 @@ import java.util.AbstractMap;
 public class CreateDimensionMod {
 	public static final Logger LOGGER = LogManager.getLogger(CreateDimensionMod.class);
 	public static final String MODID = "create_dimension";
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID)
+            .defaultCreativeTab((ResourceKey<CreativeModeTab>) null);
 
 	public CreateDimensionMod() {
 
 		MinecraftForge.EVENT_BUS.register(this);
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        REGISTRATE.registerEventListeners(bus);
+
 
 		ModBlocks.REGISTRY.register(bus);
 
-		ModItems.REGISTRY.register(bus);
+		ModItems.register();
 
 		ModTabs.REGISTRY.register(bus);
 
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateDimensionModClient.onCtorClient(bus));
+
 	}
 
-
+    public static ResourceLocation asResource(String path) {
+        return new ResourceLocation(MODID, path);
+    }
 	private static final String PROTOCOL_VERSION = "1";
 	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 	private static int messageID = 0;

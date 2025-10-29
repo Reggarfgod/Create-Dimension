@@ -3,6 +3,7 @@ package com.reggarf.mods.create_dimension.world.teleporter;
 
 
 import com.reggarf.mods.create_dimension.registry.ModBlocks;
+import com.simibubi.create.AllBlocks;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.Vec3;
@@ -33,7 +34,7 @@ public class ModPortalShape {
 	private static final int MIN_HEIGHT = 3;
 	public static final int MAX_HEIGHT = 21;
 	private static final BlockBehaviour.StatePredicate FRAME = (p_77720_, p_77721_, p_77722_) -> {
-		return p_77720_.getBlock() == Blocks.ANDESITE;
+		return p_77720_.getBlock() == AllBlocks.RAILWAY_CASING.get();
 	};
 	private static final float SAFE_TRAVEL_MAX_ENTITY_XY = 4.0F;
 	private static final double SAFE_TRAVEL_MAX_VERTICAL_DELTA = 1.0D;

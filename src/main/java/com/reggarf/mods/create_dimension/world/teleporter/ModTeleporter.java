@@ -2,6 +2,7 @@
 package com.reggarf.mods.create_dimension.world.teleporter;
 
 import com.reggarf.mods.create_dimension.registry.ModBlocks;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -348,4 +349,20 @@ public static PortalInfo getPortalInfo(ServerLevel destination, Entity probe) {
 		BlockState blockstate = this.level.getBlockState(pos);
 		return blockstate.canBeReplaced() && blockstate.getFluidState().isEmpty();
 	}
+
+    public void savePortalData(CompoundTag tag) {
+        tag.putInt("PortalX", entityEnterPos.getX());
+        tag.putInt("PortalY", entityEnterPos.getY());
+        tag.putInt("PortalZ", entityEnterPos.getZ());
+        tag.putString("Level", level.dimension().location().toString());
+    }
+
+    public static ModTeleporter loadPortalData(ServerLevel server, CompoundTag tag) {
+        int x = tag.getInt("PortalX");
+        int y = tag.getInt("PortalY");
+        int z = tag.getInt("PortalZ");
+        BlockPos pos = new BlockPos(x, y, z);
+        return new ModTeleporter(server, pos);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.reggarf.mods.create_dimension.block;
 
 
 
+import com.reggarf.mods.create_dimension.world.dimension.ModDimension;
 import com.reggarf.mods.create_dimension.world.teleporter.ModPortalShape;
 import com.reggarf.mods.create_dimension.world.teleporter.ModTeleporter;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -77,20 +78,23 @@ public class ModPortalBlock extends NetherPortalBlock {
 			world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(("block.portal.ambient"))), SoundSource.BLOCKS, 0.5f, random.nextFloat() * 0.4f + 0.8f);
 	}
 
-	@Override
-	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-		if (entity.canChangeDimensions() && !entity.level().isClientSide() && true) {
-			if (entity.isOnPortalCooldown()) {
-				entity.setPortalCooldown();
-			} else if (entity.level().dimension() != ResourceKey.create(Registries.DIMENSION, new ResourceLocation("create_dimension:steamworks_realm"))) {
-				entity.setPortalCooldown();
-				teleportToDimension(entity, pos, ResourceKey.create(Registries.DIMENSION, new ResourceLocation("create_dimension:steamworks_realm")));
-			} else {
-				entity.setPortalCooldown();
-				teleportToDimension(entity, pos, Level.OVERWORLD);
-			}
-		}
-	}
+    @Override
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+        if (entity.canChangeDimensions() && !world.isClientSide()) {
+            if (entity.isOnPortalCooldown()) {
+                entity.setPortalCooldown();
+                return;
+            }
+
+            entity.setPortalCooldown();
+            ResourceKey<Level> destination =
+                    world.dimension() == ModDimension.STEAMWORKS_REALM_LEVEL_KEY
+                            ? Level.OVERWORLD
+                            : ModDimension.STEAMWORKS_REALM_LEVEL_KEY;
+
+            teleportToDimension(entity, pos, destination);
+        }
+    }
 
 	private void teleportToDimension(Entity entity, BlockPos pos, ResourceKey<Level> destinationType) {
 		entity.changeDimension(entity.getServer().getLevel(destinationType), new ModTeleporter(entity.getServer().getLevel(destinationType), pos));

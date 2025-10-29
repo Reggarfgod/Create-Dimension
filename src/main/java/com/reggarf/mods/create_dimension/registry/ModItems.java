@@ -1,18 +1,12 @@
-
-
 package com.reggarf.mods.create_dimension.registry;
 
-
-import com.reggarf.mods.create_dimension.CreateDimensionMod;
 import com.reggarf.mods.create_dimension.item.igniter;
-import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.DeferredRegister;
-
-import net.minecraft.world.item.Item;
+import com.tterrag.registrate.util.entry.ItemEntry;
+import static com.reggarf.mods.create_dimension.CreateDimensionMod.REGISTRATE;
 
 public class ModItems {
-	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, CreateDimensionMod.MODID);
-	public static final RegistryObject<Item> STEAMWORKS_REALM = REGISTRY.register("steamworks_realm", () -> new igniter());
-
+    public static final ItemEntry<igniter> STEAMWORKS_REALM = REGISTRATE
+            .item("steamworks_realm", igniter::new)
+            .register();
+    public static void register() {}
 }
