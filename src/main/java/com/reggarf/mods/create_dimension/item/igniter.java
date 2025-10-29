@@ -2,6 +2,7 @@ package com.reggarf.mods.create_dimension.item;
 
 import com.reggarf.mods.create_dimension.block.ModPortalBlock;
 import net.minecraft.ChatFormatting;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -18,7 +19,7 @@ import net.minecraft.client.gui.screens.Screen;
 import java.util.List;
 
 public class igniter extends Item {
-    // ✅ Must accept Item.Properties for Registrate
+
     public igniter(Properties properties) {
         super(properties
                 .rarity(Rarity.COMMON)

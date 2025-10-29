@@ -34,6 +34,7 @@ public class ModPonderTags {
 
         HELPER.addToTag(PORTAL)
                 //BASE
-                .add(ModItems.STEAMWORKS_REALM);
+                .add(ModItems.STEAMWORKS_REALM)
+                .add(AllBlocks.RAILWAY_CASING);
     }
 }
