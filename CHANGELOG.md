@@ -5,8 +5,8 @@ CHANGELOG [Version: 1.0.3]
 - Emerald Gen
 
 CHANGELOG [Version: 1.0.4]
-Note
 
+Note:
 Before updating the mod, please make a backup of your world to prevent any potential data loss or compatibility issues.
 
 #Fix
