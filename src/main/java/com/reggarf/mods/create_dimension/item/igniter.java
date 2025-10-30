@@ -2,6 +2,8 @@
 package com.reggarf.mods.create_dimension.item;
 
 import com.reggarf.mods.create_dimension.block.ModPortalBlock;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -17,26 +19,24 @@ import net.minecraft.core.BlockPos;
 import java.util.List;
 
 public class igniter extends Item {
-	public igniter() {
-		super(new Properties().rarity(Rarity.COMMON).durability(64));
-	}
+    public igniter(Properties properties) {
+        super(properties
+                .rarity(Rarity.COMMON)
+                .durability(64));
+    }
+
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
 
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.steamworks_realm_igniter.tooltip"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.not_craftable_steamworks_realm_igniter.tooltip"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.ores_info"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.iron"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.gold"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.copper"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.zinc"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.diamond"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.emerald"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.lapis"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.quartz"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.redstone"));
-		tooltipComponents.add(Component.translatable("tooltip.create_dimension.netherite"));
+
+        tooltipComponents.add(Component.literal("§7[Hold §eShift§7 for Summary]").withStyle(ChatFormatting.DARK_GRAY));
+        if (Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("tooltip.create_dimension.steamworks_realm_igniter.tooltip")
+                    .withStyle(ChatFormatting.GOLD));
+            tooltipComponents.add(Component.translatable("tooltip.create_dimension.not_craftable_steamworks_realm_igniter.tooltip")
+                    .withStyle(ChatFormatting.GRAY));
+        }
 
 		super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 	}

@@ -4,30 +4,30 @@ package com.reggarf.mods.create_dimension;
 import com.reggarf.mods.create_dimension.registry.ModBlocks;
 import com.reggarf.mods.create_dimension.registry.ModItems;
 import com.reggarf.mods.create_dimension.registry.ModTabs;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
-
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.fml.util.thread.SidedThreadGroups;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.bus.api.IEventBus;
-
-import net.minecraft.util.Tuple;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.network.codec.StreamCodec;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.util.RegistrateDistExecutor;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.item.CreativeModeTab;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.util.thread.SidedThreadGroups;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Collection;
-import java.util.ArrayList;
 
 
 
@@ -35,23 +35,28 @@ import java.util.ArrayList;
 public class CreateDimensionMod {
 	public static final Logger LOGGER = LogManager.getLogger(CreateDimensionMod.class);
 	public static final String MODID = "create_dimension";
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID)
+            .defaultCreativeTab((ResourceKey<CreativeModeTab>) null);
 
 	public CreateDimensionMod(IEventBus modEventBus) {
 
 		NeoForge.EVENT_BUS.register(this);
 		modEventBus.addListener(this::registerNetworking);
 
+        REGISTRATE.registerEventListeners(modEventBus);
+
 		ModBlocks.REGISTRY.register(modEventBus);
 
-		ModItems.REGISTRY.register(modEventBus);
+		ModItems.register();
 
 		ModTabs.REGISTRY.register(modEventBus);
 
-
-
-
+        RegistrateDistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateDimensionModClient.onCtorClient(modEventBus));
 	}
 
+    public static ResourceLocation asResource(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    }
 
 	private static boolean networkingRegistered = false;
 	private static final Map<CustomPacketPayload.Type<?>, NetworkMessage<?>> MESSAGES = new HashMap<>();
