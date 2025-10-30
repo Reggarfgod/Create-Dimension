@@ -22,7 +22,8 @@ Before updating the mod, please make a backup of your world to prevent any poten
 
 5. can set respawn
 6. added ponder
+7. increase the world height (640) to allow building taller structures
 
 #Balance
 
-7. Changed Andesite portal block to Train CASING just from one side
+8. Changed Andesite portal block to Train CASING just from one side
