@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.reggarf.mods.create_dimension.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "create_dimension.refmap.json",
+  "mixins": ["AllPortalTracksMixin"],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

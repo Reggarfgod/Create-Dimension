@@ -1,0 +1,155 @@
+buildscript {
+    repositories {
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+group = rootProject.mod_group_id
+version = "${rootProject.mod_version}+forge-1.20.1"
+
+base {
+    archivesName = "${rootProject.mod_id}-forge-1.20.1"
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+// Include common sources and resources
+sourceSets.main.resources.srcDirs rootProject.file('common/src/main/resources')
+sourceSets.main.java.srcDirs rootProject.file('common/src/main/java')
+
+minecraft {
+    mappings channel: rootProject.forge_1_20_1_mapping_channel, version: rootProject.forge_1_20_1_mapping_version
+    copyIdeResources = true
+
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                "${rootProject.mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        client {
+            property 'forge.enabledGameTestNamespaces', rootProject.mod_id
+        }
+
+        server {
+            property 'forge.enabledGameTestNamespaces', rootProject.mod_id
+            args '--nogui'
+        }
+
+        data {
+            workingDirectory project.file('run-data')
+            args '--mod', rootProject.mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing', rootProject.file('common/src/main/resources/')
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, "${rootProject.mod_id}.refmap.json"
+    config "${rootProject.mod_id}.mixins.json"
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven { url = "https://maven.createmod.net" }
+    maven { url = "https://maven.ithundxr.dev/mirror" }
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+    maven { url = "https://cursemaven.com" }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${rootProject.forge_1_20_1_minecraft_version}-${rootProject.forge_1_20_1_forge_version}"
+
+    implementation fg.deobf("curse.maven:jei-238222:6075247")
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:5057220")
+    implementation fg.deobf("curse.maven:create-better-villager-1108525:6508333")
+    implementation fg.deobf("curse.maven:underground-villages-stoneholm-1123746:5887917")
+    implementation fg.deobf("curse.maven:ftb-chunks-forge-314906:5956390")
+    implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
+    implementation fg.deobf("curse.maven:ftb-teams-forge-404468:6130786")
+    implementation fg.deobf("curse.maven:ftb-library-forge-404465:6807424")
+
+    implementation(fg.deobf("com.simibubi.create:create-${rootProject.forge_1_20_1_minecraft_version}:${rootProject.forge_1_20_1_create_version}:slim") { transitive = false })
+    implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${rootProject.forge_1_20_1_minecraft_version}:${rootProject.forge_1_20_1_ponder_version}"))
+    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${rootProject.forge_1_20_1_minecraft_version}:${rootProject.forge_1_20_1_flywheel_version}"))
+    runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${rootProject.forge_1_20_1_minecraft_version}:${rootProject.forge_1_20_1_flywheel_version}"))
+    implementation(fg.deobf("com.tterrag.registrate:Registrate:${rootProject.forge_1_20_1_registrate_version}"))
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+    implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+minecraft {
+    runs {
+        client {
+            property("mixin.env.remapRefMap", "true")
+            property("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
+        }
+    }
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    var replaceProperties = [
+            minecraft_version       : rootProject.forge_1_20_1_minecraft_version,
+            minecraft_version_range : rootProject.forge_1_20_1_minecraft_version_range,
+            forge_version           : rootProject.forge_1_20_1_forge_version,
+            forge_version_range     : rootProject.forge_1_20_1_forge_version_range,
+            loader_version_range    : rootProject.forge_1_20_1_loader_version_range,
+            mod_id                  : rootProject.mod_id,
+            mod_name                : rootProject.mod_name,
+            mod_license             : rootProject.mod_license,
+            mod_version             : rootProject.mod_version,
+            mod_authors             : rootProject.mod_authors,
+            mod_description         : rootProject.mod_description,
+    ]
+
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                "Specification-Title"     : rootProject.mod_id,
+                "Specification-Vendor"    : rootProject.mod_authors,
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : rootProject.mod_authors,
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+    finalizedBy 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

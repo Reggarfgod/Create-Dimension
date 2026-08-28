@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_dimension.main.iml" filepath="$PROJECT_DIR$/.idea/modules/create_dimension.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_dimension.test.iml" filepath="$PROJECT_DIR$/.idea/modules/create_dimension.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge-1.20.1/create_dimension.forge-1_20_1.main.iml" filepath="$PROJECT_DIR$/.idea/modules/forge-1.20.1/create_dimension.forge-1_20_1.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge-1.20.1/create_dimension.forge-1_20_1.test.iml" filepath="$PROJECT_DIR$/.idea/modules/forge-1.20.1/create_dimension.forge-1_20_1.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/neoforge-1.21.1/create_dimension.neoforge-1_21_1.main.iml" filepath="$PROJECT_DIR$/.idea/modules/neoforge-1.21.1/create_dimension.neoforge-1_21_1.main.iml" />
     </modules>
   </component>
 </project>

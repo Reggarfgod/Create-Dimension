@@ -1,0 +1,120 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'net.neoforged.moddev' version '2.0.78'
+}
+
+group = rootProject.mod_group_id
+version = "${rootProject.mod_version}+neoforge-1.21.1"
+
+base {
+    archivesName = "${rootProject.mod_id}-neoforge-1.21.1"
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+// Include common sources and resources
+sourceSets.main.resources.srcDirs rootProject.file('common/src/main/resources')
+sourceSets.main.java.srcDirs rootProject.file('common/src/main/java')
+
+neoForge {
+    version = rootProject.neoforge_1_21_1_neoforge_version
+
+    runs {
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', rootProject.mod_id
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', rootProject.mod_id
+        }
+
+        data {
+            data()
+            programArguments.addAll '--mod', rootProject.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing', rootProject.file('common/src/main/resources/').getAbsolutePath()
+        }
+    }
+
+    mods {
+        "${rootProject.mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+    maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
+    maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
+    maven { url = "https://maven.blamejared.com/" } // JEI
+    maven { url = "https://maven.architectury.dev/" } // Architectury
+    maven { url = "https://maven.shedaniel.me/" } // Cloth Config
+    maven { url = "https://maven.ftb.dev/releases" } // FTB Mods
+    maven { url = "https://cursemaven.com" } // CurseForge Maven
+    mavenCentral()
+}
+
+dependencies {
+    // Create & Core NeoForge 1.21.1 Dependencies
+    implementation("com.simibubi.create:create-${rootProject.neoforge_1_21_1_minecraft_version}:${rootProject.neoforge_1_21_1_create_version}:slim") { transitive = false }
+    implementation("net.createmod.ponder:ponder-neoforge:${rootProject.neoforge_1_21_1_ponder_version}+mc${rootProject.neoforge_1_21_1_minecraft_version}")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${rootProject.neoforge_1_21_1_minecraft_version}:${rootProject.neoforge_1_21_1_flywheel_version}")
+    runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${rootProject.neoforge_1_21_1_minecraft_version}:${rootProject.neoforge_1_21_1_flywheel_version}")
+    implementation("com.tterrag.registrate:Registrate:${rootProject.neoforge_1_21_1_registrate_version}")
+
+    // JEI (Just Enough Items) NeoForge 1.21.1
+    compileOnly("mezz.jei:jei-1.21.1-common-api:19.21.0.247")
+    compileOnly("mezz.jei:jei-1.21.1-neoforge-api:19.21.0.247")
+    runtimeOnly("mezz.jei:jei-1.21.1-neoforge:19.21.0.247")
+
+    // JER (Just Enough Resources) NeoForge 1.21.1
+    implementation("curse.maven:just-enough-resources-jer-240630:6190140")
+
+    // Cloth Config NeoForge 1.21.1 (Required by create_better_villagers)
+    implementation("me.shedaniel.cloth:cloth-config-neoforge:15.0.140")
+
+    // Architectury API NeoForge 1.21.1
+    implementation("dev.architectury:architectury-neoforge:13.0.8")
+
+    // FTB Mods NeoForge 1.21.1
+    implementation("dev.ftb.mods:ftb-library-neoforge:2101.1.34")
+    implementation("dev.ftb.mods:ftb-chunks-neoforge:2101.1.21")
+    implementation("dev.ftb.mods:ftb-teams-neoforge:2101.1.11")
+
+    // Addons & Content Mods NeoForge 1.21.1
+    implementation("curse.maven:create-better-villager-1108525:6513892")
+    implementation "curse.maven:better-library-1150683:8553533"
+    implementation "curse.maven:underground-villages-stoneholm-1123746:8172510"
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    var replaceProperties = [
+            minecraft_version       : rootProject.neoforge_1_21_1_minecraft_version,
+            minecraft_version_range : rootProject.neoforge_1_21_1_minecraft_version_range,
+            neoforge_version        : rootProject.neoforge_1_21_1_neoforge_version,
+            loader_version_range    : rootProject.neoforge_1_21_1_loader_version_range,
+            mod_id                  : rootProject.mod_id,
+            mod_name                : rootProject.mod_name,
+            mod_license             : rootProject.mod_license,
+            mod_version             : rootProject.mod_version,
+            mod_authors             : rootProject.mod_authors,
+            mod_description         : rootProject.mod_description,
+    ]
+
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

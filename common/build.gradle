@@ -1,0 +1,25 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+    maven { url = "https://maven.minecraftforge.net/" }
+    maven { url = "https://maven.neoforged.net/releases" }
+    maven { url = "https://maven.createmod.net" }
+}
+
+dependencies {
+    // Shared annotations and lightweight compile-time dependencies
+    compileOnly 'org.jetbrains:annotations:24.0.1'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
