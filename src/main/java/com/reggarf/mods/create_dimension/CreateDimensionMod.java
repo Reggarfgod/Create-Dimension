@@ -1,13 +1,17 @@
 package com.reggarf.mods.create_dimension;
 
+import com.reggarf.mods.create_dimension.client.ModClientIniter;
+import com.reggarf.mods.create_dimension.config.ModConfig;
 import com.reggarf.mods.create_dimension.registry.ModBlocks;
 import com.reggarf.mods.create_dimension.registry.ModItems;
 import com.reggarf.mods.create_dimension.registry.ModTabs;
+import com.reggarf.mods.create_dimension.world.feature.ModFeatures;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -47,14 +51,14 @@ public class CreateDimensionMod {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         REGISTRATE.registerEventListeners(bus);
 
+        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.SPEC, "create_dimension/common.toml");
 
 		ModBlocks.REGISTRY.register(bus);
-
+		ModFeatures.REGISTRY.register(bus);
 		ModItems.register();
-
 		ModTabs.REGISTRY.register(bus);
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateDimensionModClient.onCtorClient(bus));
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ModClientIniter.onCtorClient(bus));
 
 	}
 

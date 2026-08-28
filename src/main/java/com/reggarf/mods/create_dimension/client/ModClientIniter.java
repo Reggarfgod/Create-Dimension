@@ -1,4 +1,4 @@
-package com.reggarf.mods.create_dimension;
+package com.reggarf.mods.create_dimension.client;
 
 
 
@@ -8,16 +8,19 @@ import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-public class CreateDimensionModClient {
+public class ModClientIniter {
 
     public static void onCtorClient(IEventBus modEventBus) {
 
-        modEventBus.addListener(CreateDimensionModClient::clientInit);
-        modEventBus.addListener(CreateDimensionModClient::onRegisterAdditionalModels);
+        modEventBus.addListener(ModClientIniter::clientInit);
+        modEventBus.addListener(ModClientIniter::onRegisterAdditionalModels);
+
     }
     public static void clientInit(final FMLClientSetupEvent event) {
         PonderIndex.addPlugin(new ModPonderPlugin());
+        ModClient.onInitializeClient(event);
     }
     public static void onRegisterAdditionalModels(ModelEvent.RegisterAdditional event){
+
     }
 }
