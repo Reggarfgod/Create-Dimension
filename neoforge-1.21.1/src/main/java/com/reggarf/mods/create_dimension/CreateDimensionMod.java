@@ -43,7 +43,7 @@ public class CreateDimensionMod {
 		modEventBus.addListener(this::registerNetworking);
 
 		// Config registration
-		modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, ModConfig.SPEC);
+		modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, ModConfig.SPEC, "create_dimension/common.toml");
 
         REGISTRATE.registerEventListeners(modEventBus);
 
