@@ -1,4 +1,3 @@
-
 package com.reggarf.mods.create_dimension.item;
 
 import com.reggarf.mods.create_dimension.block.ModPortalBlock;
@@ -25,17 +24,12 @@ public class igniter extends Item {
                 .durability(64));
     }
 
-
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-
-
         tooltipComponents.add(Component.literal("§7[Hold §eShift§7 for Summary]").withStyle(ChatFormatting.DARK_GRAY));
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.create_dimension.steamworks_realm_igniter.tooltip")
                     .withStyle(ChatFormatting.GOLD));
-            tooltipComponents.add(Component.translatable("tooltip.create_dimension.not_craftable_steamworks_realm_igniter.tooltip")
-                    .withStyle(ChatFormatting.GRAY));
         }
 
 		super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
@@ -50,11 +44,8 @@ public class igniter extends Item {
 		if (!entity.mayUseItemAt(pos, context.getClickedFace(), itemstack)) {
 			return InteractionResult.FAIL;
 		} else {
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
 			boolean success = false;
-			if (world.isEmptyBlock(pos) && true) {
+			if (world.isEmptyBlock(pos)) {
 				ModPortalBlock.portalSpawn(world, pos);
 				itemstack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(context.getHand()));
 				success = true;

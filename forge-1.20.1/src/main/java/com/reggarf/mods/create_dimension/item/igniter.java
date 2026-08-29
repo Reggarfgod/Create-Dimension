@@ -34,12 +34,9 @@ public class igniter extends Item {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.create_dimension.steamworks_realm_igniter.tooltip")
                     .withStyle(ChatFormatting.GOLD));
-            tooltipComponents.add(Component.translatable("tooltip.create_dimension.not_craftable_steamworks_realm_igniter.tooltip")
-                    .withStyle(ChatFormatting.GRAY));
         }
         super.appendHoverText(pStack, pLevel, tooltipComponents, pIsAdvanced);
     }
-
 
     @Override
     public InteractionResult useOn(UseOnContext context) {

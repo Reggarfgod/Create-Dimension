@@ -27,9 +27,9 @@ java {
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
-// Include common sources and resources
-sourceSets.main.resources.srcDirs rootProject.file('common/src/main/resources')
-sourceSets.main.java.srcDirs rootProject.file('common/src/main/java')
+// Include common sources and resources (append to loader sources)
+sourceSets.main.resources.srcDir rootProject.file('common/src/main/resources')
+sourceSets.main.java.srcDir rootProject.file('common/src/main/java')
 
 minecraft {
     mappings channel: rootProject.forge_1_20_1_mapping_channel, version: rootProject.forge_1_20_1_mapping_version
@@ -84,8 +84,6 @@ dependencies {
 
     implementation fg.deobf("curse.maven:jei-238222:6075247")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:5057220")
-    implementation fg.deobf("curse.maven:create-better-villager-1108525:6508333")
-    implementation fg.deobf("curse.maven:underground-villages-stoneholm-1123746:5887917")
     implementation fg.deobf("curse.maven:ftb-chunks-forge-314906:5956390")
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
     implementation fg.deobf("curse.maven:ftb-teams-forge-404468:6130786")

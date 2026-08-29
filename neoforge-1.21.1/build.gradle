@@ -87,9 +87,8 @@ dependencies {
     implementation("dev.ftb.mods:ftb-teams-neoforge:2101.1.11")
 
     // Addons & Content Mods NeoForge 1.21.1
-    implementation("curse.maven:create-better-villager-1108525:6513892")
     implementation "curse.maven:better-library-1150683:8553533"
-    implementation "curse.maven:underground-villages-stoneholm-1123746:8172510"
+
 }
 
 tasks.named('processResources', ProcessResources).configure {
